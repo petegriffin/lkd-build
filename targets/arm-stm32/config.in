@@ -1,4 +1,5 @@
 ARCH:=arm
+GDBARCH=arm
 SUBARCH:=armv7
 DEFCONFIG?=stm32_defconfig
 LINUX_DEFAULT_TARGET=xipImage

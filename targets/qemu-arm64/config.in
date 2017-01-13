@@ -1,4 +1,5 @@
-ARCH:=aarch64
+ARCH:=arm64
+GDBARCH:=aarch64
 SUBARCH:=armv8
 
 UBUNTUFS_VERSION=vivid

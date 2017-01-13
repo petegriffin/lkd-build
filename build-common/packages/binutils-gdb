@@ -1,8 +1,8 @@
 ## Build a binutils-gdb package
 
 BINUTILS_SRC?=$(BUILDSYS_SOURCES)/binutils-gdb
-BINUTILS_BUILD=$(BUILDSYS_BUILD)/$(ARCH)/binutils-gdb
-BINUTILS_INSTALL=$(BUILDSYS_INSTALL)/$(ARCH)/binutils-gdb
+BINUTILS_BUILD=$(BUILDSYS_BUILD)/$(GDBARCH)/binutils-gdb
+BINUTILS_INSTALL=$(BUILDSYS_INSTALL)/$(GDBARCH)/binutils-gdb
 
 $(BINUTILS_BUILD) $(BINUTILS_INSTALL):
 	@mkdir -p $@
@@ -31,14 +31,14 @@ binutils-gdb-configure $(BINUTILS_BUILD)/Makefile: | $(BINUTILS_SRC) $(BINUTILS_
 	cd $(BINUTILS_BUILD) && \
 	$(BINUTILS_SRC)/configure \
 		--prefix=/usr \
-		--target=$(ARCH)-linux \
-		--program-prefix=$(ARCH)-linux- \
+		--target=$(GDBARCH)-linux \
+		--program-prefix=$(GDBARCH)-linux- \
 		--disable-nls \
 		--enable-linux-kernel-aware \
 		--enable-shtdi \
 		--enable-tui \
 		--with-python=yes \
-		$(BINUTILS_CONF_EXT_$(ARCH))
+		$(BINUTILS_CONF_EXT_$(GDBARCH))
 
 binutils-gdb-build: $(BINUTILS_BUILD)/Makefile
 	$(MAKE) CFLAGS='-g3 -O0' -j $(J) -C $(BINUTILS_BUILD)
@@ -60,7 +60,7 @@ binutils-gdb-distclean:
 
 ## Helpers to use the built and installed GDB
 
-GDB?=$(shell PATH=$(PATH) which $(ARCH)-linux-gdb)
+GDB?=$(shell PATH=$(PATH) which $(GDBARCH)-linux-gdb)
 
 gdb-version:
 	@echo "Using GDB from : $(GDB)"

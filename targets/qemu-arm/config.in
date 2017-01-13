@@ -1,4 +1,5 @@
 ARCH:=arm
+GDBARCH:=arm
 SUBARCH:=armv7
 
 GDB_ARMGDB_OPTS+=-ex 'b internal_error'
