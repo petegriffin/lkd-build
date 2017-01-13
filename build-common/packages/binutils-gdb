@@ -41,7 +41,7 @@ binutils-gdb-configure $(BINUTILS_BUILD)/Makefile: | $(BINUTILS_SRC) $(BINUTILS_
 		$(BINUTILS_CONF_EXT_$(ARCH))
 
 binutils-gdb-build: $(BINUTILS_BUILD)/Makefile
-	$(MAKE) -j $(J) -C $(BINUTILS_BUILD)
+	$(MAKE) CFLAGS='-g3 -O0' -j $(J) -C $(BINUTILS_BUILD)
 
 binutils-gdb-%: $(BINUTILS_BUILD)/Makefile
 	$(MAKE) -C $(BINUTILS_BUILD) $*
