@@ -35,6 +35,31 @@ qemu_arma9_smp: QEMU_CORES:=2
 qemu-run: qemu-system-$(ARCH)
 
 ## As long as the kernel is multiv7 - we can just run as a VExpress..
+qemu-system-ppc:
+	echo $(QEMU_GDBSERVER_PORT) > $(QEMU_GDBSERVER_PORT_FILE)
+	qemu-system-ppc \
+		-kernel $(LINUX_BUILD)/arch/powerpc/boot/zImage \
+		-initrd /home/griffinp/Desktop/powerpc/initrd \
+		-M $(QEMU_MACHINE) \
+		-m 1024 \
+		$(QEMU_HALT) \
+		-gdb tcp::$(QEMU_GDBSERVER_PORT) \
+		-redir tcp:2222::22
+
+qemu-system-ppc64:
+	echo $(QEMU_GDBSERVER_PORT) > $(QEMU_GDBSERVER_PORT_FILE)
+	qemu-system-ppc64 \
+		-kernel $(LINUX_BUILD)/vmlinux \
+		-initrd /home/griffinp/Desktop/powerpc64/initrd \
+		-M $(QEMU_MACHINE) \
+		-smp $(QEMU_CORES) \
+		-m 1024 \
+		$(QEMU_HALT) \
+		-gdb tcp::$(QEMU_GDBSERVER_PORT) \
+		-redir tcp:2222::22
+
+
+## As long as the kernel is multiv7 - we can just run as a VExpress..
 qemu-system-arm: $(QEMU_DTB)
 	echo $(QEMU_GDBSERVER_PORT) > $(QEMU_GDBSERVER_PORT_FILE)
 	qemu-system-arm \
