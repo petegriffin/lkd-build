@@ -24,8 +24,13 @@ QEMU_DTB?=vexpress-v2p-ca15-tc1.dtb
 qemu_arma9: QEMU_MACHINE:=vexpress-a9
 qemu_arma9: QEMU_DTB:=vexpress-v2p-ca9.dtb
 qemu_arma9: qemu-system-arm
+qemu_arma9: QEMU_CORES:=1
 
-QEMU_CORES?=2
+qemu_arma9_smp: QEMU_MACHINE:=vexpress-a9
+qemu_arma9_smp: QEMU_DTB:=vexpress-v2p-ca9.dtb
+qemu_arma9_smp: qemu-system-arm
+qemu_arma9_smp: QEMU_CORES:=2
+
 
 qemu-run: qemu-system-$(ARCH)
 
