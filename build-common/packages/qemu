@@ -71,7 +71,8 @@ qemu-system-arm: $(QEMU_DTB)
 		-append 'root=/dev/nfs nfsroot=$(QEMU_NFSROOT) rw ip=dhcp mem=1024M raid=noautodetect rootwait console=ttyAMA0,38400n8 devtmpfs.mount=0' \
 		-nographic \
 		$(QEMU_HALT) \
-		-gdb tcp::$(QEMU_GDBSERVER_PORT)
+		-gdb tcp::$(QEMU_GDBSERVER_PORT) \
+		-redir tcp:2222::22
 
 qemu_halted: QEMU_HALT:=-S
 qemu_halted: qemu-system-arm
